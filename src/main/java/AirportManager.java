@@ -12,8 +12,6 @@ public class AirportManager {
     public static void main(String ... argv) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
 
-
-
         List<Plane> planes = new ArrayList<>();
 
         boolean validJson = false;
@@ -50,13 +48,14 @@ public class AirportManager {
             String[] stringSplit = command.split(" ");
 
             switch (stringSplit[0]) {
-                case "gay":
-                    System.out.println("you're gay");
+                case "hello":
+                    System.out.println("hey there");
+                    //methods here
                     break;
                 case "exit":
                     return;
                 default:
-                    System.out.println("wtf?");
+                    System.out.println("Command not recognised");
             }
 
         }
@@ -72,20 +71,15 @@ public class AirportManager {
         JSONParser parser = new JSONParser();
         try {
 
-            //JSONObject jsonObject = (JSONObject) parser.parse("/Users/user/Documents/OneDrive/Documents/Masters work/Plane.json");
             Object obj = parser.parse(new InputStreamReader(new FileInputStream("/Users/user/Documents/OneDrive/Documents/Masters work/Plane.json")));
 
-            // A JSON array. JSONObject supports java.util.List interface.
             JSONArray planesJsonList = (JSONArray) obj;
 
-            // An iterator over a collection. Iterator takes the place of Enumeration in the Java Collections Framework.
-            // Iterators differ from enumerations in two ways:
-            // 1. Iterators allow the caller to remove elements from the underlying collection during the iteration with well-defined semantics.
-            // 2. Method names have been improved.
             Iterator<JSONObject> iterator = planesJsonList.iterator();
             while (iterator.hasNext()) {
-                //System.out.println(iterator.next());
+
                 Plane plane = jsonToPlane(iterator.next());
+
                 if (plane != null) {
                     planeList.add(plane);
                 }
