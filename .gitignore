@@ -69,3 +69,59 @@ fabric.properties
 
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
+
+#built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
+*.class
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+# Eclipse project files
+.classpath
+.project
+
+# Android Studio
+*.stackdump
+*.iml
+.idea/caches
+.idea/libraries
+.idea/modules.xml
+.idea/gradle.xml
+.idea/misc.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/sonarlint
+.idea/inspectionProfiles
+.idea/vcs.xml
+
+.gradle
+build/
+
+#New config
+/captures
+.externalNativeBuild
+
+.idea/codeStyles/CiberAndroidv2_4.xml
+
+# Visual Studio Code
+.settings/
+
