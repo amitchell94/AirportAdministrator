@@ -2,23 +2,21 @@ import java.util.List;
 
 public class Plane {
     private int id;
-    private List<String> requiredServices;
+    private List<RequiredServices> requiredServices;
     private String origin;
     private String destination;
+    private PlaneState state;
 
-    public Plane(int id, List<String> requiredServices, String origin, String destination) {
+    public Plane(int id, List<RequiredServices> requiredServices, String origin, String destination, PlaneState state) {
         this.id = id;
         this.requiredServices = requiredServices;
         this.origin = origin;
         this.destination = destination;
+        this.state = state;
     }
 
     public int getId() {
         return id;
-    }
-
-    public List<String> getRequiredServices() {
-        return requiredServices;
     }
 
     public String getOrigin() {
@@ -27,5 +25,13 @@ public class Plane {
 
     public String getDestination() {
         return destination;
+    }
+
+    public PlaneState getState() {
+        return state;
+    }
+
+    public void setState(PlaneState state) {
+        this.state = state;
     }
 }
