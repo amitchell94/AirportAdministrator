@@ -1,164 +1,90 @@
+import helper.ScannerHelper;
+import helper.ParserHelper;
+import models.AirportManagerCommand;
+import models.Plane;
+import models.PlaneState;
+import models.Runway;
+import models.exception.LandingPlaneException;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-
-import java.io.*;
+import java.io.IOException;
 import java.util.*;
 
 public class AirportManager {
-
     public static void main(String ... argv) {
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        Runway runway = null;
 
-        Map<Integer,Plane> planes = new HashMap<>();
-        Plane[] runwayArray = new Plane[10];
-
-        boolean validJson = false;
-
-        while (!validJson) {
-            System.out.println("Please enter the file path of the JSON file");
-            String jsonFilepath = myObj.nextLine();
-
+        showWelcomeMessage();
+        while (runway == null) {
+            String jsonFilepath = ScannerHelper.readLine();
             try {
-                planes = readJson(jsonFilepath);
-
-                if (planes != null) {
-                    validJson = true;
-                }
-            } catch (Exception e) {
+                runway = Runway.createRunway(ParserHelper.loadPlanesInformation(jsonFilepath));
+            } catch (IOException e) {
+                //TODO: Should add proper error handling here other than printStackTrace.
                 e.printStackTrace();
-                System.out.println("Unable to read JSON file");
+                System.out.println("Invalid JSON file. Please, try again.");
             }
         }
 
-//        for (Plane plane :
-//                planes) {
-//            System.out.println("Plane id: " + plane.getId());
-//            System.out.println("Destination: " + plane.getDestination());
-//            System.out.println("Origin: " + plane.getOrigin());
-//            System.out.println("Required services: " + plane.getRequiredServices());
-//            System.out.println();
-//        }
+        runway.showAvailablePlanesDescription();
 
         while (true) {
+            askForInputMessage();
+            String stringCommand = ScannerHelper.readLine();
+            if (stringCommand == null) {
+                showUnrecognizedCommandMessage();
+                continue;
+            }
 
-            String command = myObj.nextLine();  // Read user input
-
-            String[] stringSplit = command.split(" ");
-
-            switch (stringSplit[0]) {
-                case "land":
-                    landPlane(stringSplit[1],planes,runwayArray);
+            String[] splittedString = stringCommand.split(" ");
+            if (splittedString.length <= 0) {
+                showWrongParametersNumberMessage();
+                continue;
+            }
+            AirportManagerCommand command = AirportManagerCommand.parseCommand(splittedString[0]);
+            if (command == null) {
+                showUnrecognizedCommandMessage();
+                continue;
+            }
+            switch (command) {
+                case LAND:
+                    if (splittedString.length < 2) {
+                        showWrongParametersNumberMessage();
+                        continue;
+                    }
+                    try {
+                        runway.landPlane(splittedString[1]);
+                    } catch (LandingPlaneException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
-                case "exit":
+                case EXIT:
                     return;
-                default:
-                    System.out.println("Command not recognised");
+                case UNKNOWN:
+                    showUnrecognizedCommandMessage();
+                    break;
             }
-
         }
-
-
-
     }
 
-    private static void landPlane(String s, Map<Integer, Plane> planes, Plane[] runwayArray) {
-        String[] stringSplit = s.split(",");
-
-        try {
-            int planeId = Integer.parseInt(stringSplit[0]);
-            int runwayId = Integer.parseInt(stringSplit[1]);
-
-            if (runwayArray[runwayId - 1] == null){
-                runwayArray[runwayId - 1] = planes.get(planeId);
-
-                planes.get(planeId).setState(PlaneState.LANDED);
-            }
-
-        } catch (Exception e){
-            e.printStackTrace();
-            System.out.println("Unable to land plane, invalid input");
-        }
-
+    private static void showWelcomeMessage() {
+        System.out.println("Welcome to Plane Runway Manager");
+        System.out.println("Please enter the path to the airport manager file.");
+        System.out.println("The program won't start until a valid JSON file is provided.");
     }
 
-    private static Map<Integer, Plane> readJson (String filepath) throws IOException {
-
-        Map<Integer,Plane> planeList = new HashMap();
-
-        JSONParser parser = new JSONParser();
-        try {
-
-            //Object obj = parser.parse(new InputStreamReader(new FileInputStream("/Users/user/Documents/OneDrive/Documents/Masters work/Plane.json")));
-            Object obj = parser.parse(new InputStreamReader(new FileInputStream(filepath)));
-
-            JSONArray planesJsonList = (JSONArray) obj;
-
-            Iterator<JSONObject> iterator = planesJsonList.iterator();
-            while (iterator.hasNext()) {
-
-                Plane plane = jsonToPlane(iterator.next());
-
-                if (plane != null) {
-                    planeList.put(plane.getId(), plane);
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
+    private static void askForInputMessage() {
+        System.out.println("Enter an action to perform");
+        System.out.println("The available actions are:");
+        for (AirportManagerCommand action: AirportManagerCommand.getAvailableCommands()) {
+            System.out.println(action);
         }
-
-        return planeList;
     }
 
-    private static Plane jsonToPlane(JSONObject jsonObject)  {
-        try {
-            int id = Integer.parseInt((String) jsonObject.get("Id"));
+    private static void showUnrecognizedCommandMessage() {
+        System.out.println("Command not recognised. Please, try again.");
+    }
 
-            JSONArray reqArray = (JSONArray) jsonObject.get("RequiredServices");
-
-            List<RequiredServices> reqList = new ArrayList<>();
-
-            Iterator<String> it = reqArray.iterator();
-
-            while (it.hasNext()) {
-
-                switch (it.next()) {
-                    case "Cleaning":
-                        if (!reqList.contains(RequiredServices.CLEANING))
-                            reqList.add(RequiredServices.CLEANING);
-                        break;
-                    case "Refuel":
-                        if (!reqList.contains(RequiredServices.REFUEL))
-                            reqList.add(RequiredServices.REFUEL);
-                        break;
-                    case "Baggage Unload":
-                        if (!reqList.contains(RequiredServices.BAGGAGE_UNLOAD))
-                            reqList.add(RequiredServices.BAGGAGE_UNLOAD);
-                        break;
-                    case "Cargo Unload":
-                        if (!reqList.contains(RequiredServices.CARGO_UNLOAD))
-                            reqList.add(RequiredServices.CARGO_UNLOAD);
-                        break;
-                    case "Maintenance":
-                        if (!reqList.contains(RequiredServices.MAINTENANCE))
-                            reqList.add(RequiredServices.MAINTENANCE);
-                        break;
-                }
-
-            }
-
-            String origin = (String) jsonObject.get("Origin");
-            String dest = (String) jsonObject.get("Destination");
-
-            Plane plane = new Plane(id, reqList, origin, dest, PlaneState.FLYING);
-
-            return plane;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
+    private static void showWrongParametersNumberMessage() {
+        System.out.println("Command not recognised. Please, add the necessary arguments.");
     }
 }
