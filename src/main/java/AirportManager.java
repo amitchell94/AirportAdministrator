@@ -25,7 +25,7 @@ public class AirportManager {
             }
         }
 
-        runway.showAvailablePlanesDescription();
+        // runway.showAvailablePlanesDescription();
 
         while (true) {
             askForInputMessage();
@@ -46,6 +46,9 @@ public class AirportManager {
                 continue;
             }
             switch (command) {
+                case GLOBAL_STATE:
+                    runway.showGlobalState();
+                    break;
                 case LAND:
                     if (splittedString.length < 2) {
                         showWrongParametersNumberMessage();
