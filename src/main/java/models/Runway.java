@@ -1,6 +1,7 @@
 package models;
 
 import models.exception.LandingPlaneException;
+import models.exception.TakeOffPlaneException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +49,40 @@ public class Runway {
             //TODO: Should add proper error handling here other than printStackTrace.
             e.printStackTrace();
             throw new LandingPlaneException("Unable to land plane, invalid input");
+        }
+    }
+
+    public void takeOffPlane(String argument) throws TakeOffPlaneException {
+        if (argument == null) throw new TakeOffPlaneException("Plane unable to take off, invalid input");
+
+        try {
+            int planeId = Integer.parseInt(argument);
+
+            if (!availablePlanes.containsKey(planeId))
+                throw new TakeOffPlaneException("Plane unable to take off. No plane with that id found.");
+
+            Plane selectedPlane = availablePlanes.get(planeId);
+
+            if (selectedPlane.getDestination().isEmpty() || selectedPlane.getDestination() == null)
+                throw new TakeOffPlaneException("Plane unable to take off, plane does not have a destination");
+
+            if (selectedPlane.getState() != PlaneState.LANDED)
+                throw new TakeOffPlaneException("Plane unable to take off. Plane id: " + " is not landed.");
+
+            for (int i = 0; i < RUNWAY_SIZE; i++) {
+                if (runwayArray[i].getId() == planeId) {
+                    // Once a plane takes off, we delete it
+                    availablePlanes.remove(planeId);
+                    runwayArray[i] = null;
+                    return;
+                }
+            }
+            throw new TakeOffPlaneException("Plane unable to take off. Plane not found on any runway");
+
+        } catch (NumberFormatException e) {
+            //TODO: Should add proper error handling here other than printStackTrace.
+            e.printStackTrace();
+            throw new TakeOffPlaneException("Plane unable to take off, invalid input");
         }
     }
 }
