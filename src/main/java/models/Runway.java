@@ -2,6 +2,7 @@ package models;
 
 import models.exception.LandingPlaneException;
 import models.exception.ParkPlaneException;
+import models.exception.PlaneStateException;
 import models.exception.TakeOffPlaneException;
 
 import java.util.HashMap;
@@ -138,4 +139,28 @@ public class Runway {
         }
     }
 
+    public void showPlaneState(String argument) throws PlaneStateException {
+        try {
+            int planeId = Integer.parseInt(argument);
+
+            if (!availablePlanes.containsKey(planeId))
+                throw new PlaneStateException("Unable to get plane state. Plane with id: " + planeId + " not found.");
+
+            Plane plane = availablePlanes.get(planeId);
+
+            System.out.println("Plane id: " + plane.getId());
+            System.out.println("State: " + plane.getState());
+            System.out.println("Services to perform:");
+            for (RequiredServiceState service : plane.getRequiredServices()) {
+                System.out.println(service);
+            }
+            System.out.println();
+
+        } catch (NumberFormatException e) {
+            //TODO: Should add proper error handling here other than printStackTrace.
+            e.printStackTrace();
+            throw new PlaneStateException("Unable to get plane state. Invalid input");
+        }
+
+    }
 }
