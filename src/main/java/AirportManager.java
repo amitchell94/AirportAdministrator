@@ -3,6 +3,7 @@ import helper.ParserHelper;
 import models.AirportManagerCommand;
 import models.Runway;
 import models.exception.LandingPlaneException;
+import models.exception.ParkPlaneException;
 import models.exception.TakeOffPlaneException;
 
 import java.io.IOException;
@@ -70,6 +71,17 @@ public class AirportManager {
                     try {
                         runway.takeOffPlane(splittedString[1]);
                     } catch (TakeOffPlaneException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case PARK:
+                    if (splittedString.length < 1) {
+                        showWrongParametersNumberMessage();
+                        continue;
+                    }
+                    try {
+                        runway.parkPlane(splittedString[1]);
+                    } catch (ParkPlaneException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
