@@ -34,8 +34,21 @@ public class Runway {
     public void showFreeRunways() {
         for (int i = 0; i < RUNWAY_SIZE; i++) {
             Plane plane = runwayArray[i];
-            if (plane != null) { continue; }
+            if (plane != null) {
+                continue;
+            }
             System.out.println("Runway number " + (i + 1) + " is free.");
+        }
+    }
+    public void showRunways() {
+        for (int i = 0; i < RUNWAY_SIZE; i++) {
+            Plane plane = runwayArray[i];
+            System.out.print("Runway number " + (i + 1) + ": ");
+            if (plane == null) {
+                System.out.println("Free");
+            } else {
+                System.out.println("Occupied by plane " + plane.getId());
+            }
         }
     }
 

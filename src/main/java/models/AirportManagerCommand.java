@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum AirportManagerCommand {
+    RUNWAYS,
     LAND,
     GLOBAL_STATE,
     TAKEOFF,
@@ -17,6 +18,7 @@ public enum AirportManagerCommand {
         return Stream.of(
                 AirportManagerCommand.LAND,
                 AirportManagerCommand.GLOBAL_STATE,
+                AirportManagerCommand.RUNWAYS,
                 AirportManagerCommand.TAKEOFF,
                 AirportManagerCommand.FREERUNWAYS,
                 AirportManagerCommand.EXIT
@@ -36,6 +38,8 @@ public enum AirportManagerCommand {
                 return "Global-state";
             case FREERUNWAYS:
                 return "Free-runways";
+            case RUNWAYS:
+                return "Runways";
             case UNKNOWN:
                 return "";
         }
@@ -46,6 +50,8 @@ public enum AirportManagerCommand {
         if (stringCommand == null) return AirportManagerCommand.UNKNOWN;
         String lowercasedCommand = stringCommand.toLowerCase();
         switch (lowercasedCommand) {
+            case "runways":
+                return AirportManagerCommand.RUNWAYS;
             case "land":
                 return AirportManagerCommand.LAND;
             case "global-state":

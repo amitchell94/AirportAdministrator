@@ -42,6 +42,9 @@ public class AirportManager {
                 continue;
             }
             switch (command) {
+                case RUNWAYS:
+                    runway.showRunways();
+                    break;
                 case GLOBAL_STATE:
                     runway.showGlobalState();
                     break;
