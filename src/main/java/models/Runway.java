@@ -31,6 +31,14 @@ public class Runway {
         }
     }
 
+    public void showFreeRunways() {
+        for (int i = 0; i < RUNWAY_SIZE; i++) {
+            Plane plane = runwayArray[i];
+            if (plane != null) { continue; }
+            System.out.println("Runway number " + (i + 1) + " is free.");
+        }
+    }
+
     public void landPlane(String argument) throws LandingPlaneException {
         if (argument == null) throw new LandingPlaneException("Unable to land plane, invalid input");
         String[] stringSplit = argument.split(",");

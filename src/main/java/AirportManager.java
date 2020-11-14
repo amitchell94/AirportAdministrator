@@ -45,6 +45,9 @@ public class AirportManager {
                 case GLOBAL_STATE:
                     runway.showGlobalState();
                     break;
+                case FREERUNWAYS:
+                    runway.showFreeRunways();
+                    break;
                 case LAND:
                     if (splittedString.length < 2) {
                         showWrongParametersNumberMessage();
@@ -83,6 +86,7 @@ public class AirportManager {
     }
 
     private static void askForInputMessage() {
+        System.out.println();
         System.out.println("Enter an action to perform");
         System.out.println("The available actions are:");
         for (AirportManagerCommand action: AirportManagerCommand.getAvailableCommands()) {
