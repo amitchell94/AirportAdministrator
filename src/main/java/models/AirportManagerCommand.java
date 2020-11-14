@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 public enum AirportManagerCommand {
     LAND,
     GLOBAL_STATE,
+    TAKEOFF,
     UNKNOWN,
     EXIT;
 
@@ -15,6 +16,7 @@ public enum AirportManagerCommand {
         return Stream.of(
                 AirportManagerCommand.LAND,
                 AirportManagerCommand.GLOBAL_STATE,
+                AirportManagerCommand.TAKEOFF,
                 AirportManagerCommand.EXIT
         ).collect(Collectors.toCollection(ArrayList::new));
     }
@@ -24,6 +26,8 @@ public enum AirportManagerCommand {
         switch (this) {
             case LAND:
                 return "Land";
+            case TAKEOFF:
+                return "Takeoff";
             case EXIT:
                 return "Exit";
             case GLOBAL_STATE:
@@ -42,6 +46,8 @@ public enum AirportManagerCommand {
                 return AirportManagerCommand.LAND;
             case "global-state":
                 return AirportManagerCommand.GLOBAL_STATE;
+            case "takeoff":
+                return AirportManagerCommand.TAKEOFF;
             case "exit":
                 return AirportManagerCommand.EXIT;
             default:
