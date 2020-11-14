@@ -11,6 +11,7 @@ public enum AirportManagerCommand {
     GLOBAL_STATE,
     TAKEOFF,
     FREERUNWAYS,
+    PARK,
     UNKNOWN,
     EXIT;
 
@@ -32,6 +33,8 @@ public enum AirportManagerCommand {
                 return "Land";
             case TAKEOFF:
                 return "Takeoff";
+            case PARK:
+                return "Park";
             case EXIT:
                 return "Exit";
             case GLOBAL_STATE:
@@ -54,6 +57,8 @@ public enum AirportManagerCommand {
                 return AirportManagerCommand.RUNWAYS;
             case "land":
                 return AirportManagerCommand.LAND;
+            case "park":
+                return AirportManagerCommand.PARK;
             case "global-state":
                 return AirportManagerCommand.GLOBAL_STATE;
             case "takeoff":

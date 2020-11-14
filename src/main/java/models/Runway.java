@@ -1,6 +1,7 @@
 package models;
 
 import models.exception.LandingPlaneException;
+import models.exception.ParkPlaneException;
 import models.exception.TakeOffPlaneException;
 
 import java.util.HashMap;
@@ -106,4 +107,35 @@ public class Runway {
             throw new TakeOffPlaneException("Plane unable to take off, invalid input");
         }
     }
+    public void parkPlane(String argument) throws ParkPlaneException {
+        if (argument == null) throw new ParkPlaneException("Unable to park plane, invalid input");
+
+        try {
+            int planeId = Integer.parseInt(argument);
+
+            if (!availablePlanes.containsKey(planeId))
+                throw new ParkPlaneException("Unable to park plane. No plane with that id found.");
+
+            Plane selectedPlane = availablePlanes.get(planeId);
+
+            if (selectedPlane.getState() != PlaneState.LANDED)
+                throw new ParkPlaneException("Unable to park plane. Plane id: " + " is not landed.");
+
+            for (int i = 0; i < RUNWAY_SIZE; i++) {
+                if (runwayArray[i].getId() == planeId) {
+                    // Once a plane parks, we remove it from the runway
+                    selectedPlane.setState(PlaneState.PARKED);
+                    runwayArray[i] = null;
+                    return;
+                }
+            }
+            throw new ParkPlaneException("Unable to park plane. Plane not found on any runway");
+
+        } catch (NumberFormatException e) {
+            //TODO: Should add proper error handling here other than printStackTrace.
+            e.printStackTrace();
+            throw new ParkPlaneException("Unable to park plane, invalid input");
+        }
+    }
+
 }
