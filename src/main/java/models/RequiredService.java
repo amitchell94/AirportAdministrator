@@ -1,6 +1,6 @@
 package models;
 
-public enum RequiredServices {
+public enum RequiredService {
     CLEANING,
     REFUEL,
     BAGGAGE_UNLOAD,

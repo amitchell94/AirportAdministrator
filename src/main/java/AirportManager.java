@@ -1,13 +1,10 @@
 import helper.ScannerHelper;
 import helper.ParserHelper;
 import models.AirportManagerCommand;
-import models.Plane;
-import models.PlaneState;
 import models.Runway;
 import models.exception.LandingPlaneException;
 
 import java.io.IOException;
-import java.util.*;
 
 public class AirportManager {
     public static void main(String ... argv) {
@@ -24,8 +21,6 @@ public class AirportManager {
                 System.out.println("Invalid JSON file. Please, try again.");
             }
         }
-
-        runway.showAvailablePlanesDescription();
 
         while (true) {
             askForInputMessage();
@@ -46,6 +41,9 @@ public class AirportManager {
                 continue;
             }
             switch (command) {
+                case GLOBAL_STATE:
+                    runway.showGlobalState();
+                    break;
                 case LAND:
                     if (splittedString.length < 2) {
                         showWrongParametersNumberMessage();

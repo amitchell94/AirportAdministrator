@@ -19,12 +19,13 @@ public class Runway {
         this.availablePlanes = availablePlanes;
     }
 
-    public void showAvailablePlanesDescription() {
+    public void showGlobalState() {
         for (Plane plane: availablePlanes.values()) {
             System.out.println("Plane id: " + plane.getId());
-            System.out.println("Destination: " + plane.getDestination());
-            System.out.println("Origin: " + plane.getOrigin());
-            System.out.println("Required services: " + plane.getRequiredServices());
+            System.out.println("Services to perform:");
+            for (RequiredServiceState service : plane.getRequiredServices()) {
+                System.out.println(service);
+            }
             System.out.println();
         }
     }
