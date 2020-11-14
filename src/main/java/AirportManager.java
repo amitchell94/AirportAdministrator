@@ -4,6 +4,7 @@ import models.AirportManagerCommand;
 import models.Runway;
 import models.exception.LandingPlaneException;
 import models.exception.ParkPlaneException;
+import models.exception.PlaneStateException;
 import models.exception.TakeOffPlaneException;
 
 import java.io.IOException;
@@ -48,6 +49,17 @@ public class AirportManager {
                     break;
                 case GLOBAL_STATE:
                     runway.showGlobalState();
+                    break;
+                case STATE:
+                    if (splittedString.length < 1) {
+                        showWrongParametersNumberMessage();
+                        continue;
+                    }
+                    try {
+                        runway.showPlaneState(splittedString[1]);
+                    } catch (PlaneStateException e) {
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case FREERUNWAYS:
                     runway.showFreeRunways();
