@@ -9,6 +9,7 @@ public enum AirportManagerCommand {
     RUNWAYS,
     LAND,
     GLOBAL_STATE,
+    STATE,
     TAKEOFF,
     FREERUNWAYS,
     PARK,
@@ -19,6 +20,7 @@ public enum AirportManagerCommand {
         return Stream.of(
                 AirportManagerCommand.LAND,
                 AirportManagerCommand.GLOBAL_STATE,
+                AirportManagerCommand.STATE,
                 AirportManagerCommand.RUNWAYS,
                 AirportManagerCommand.TAKEOFF,
                 AirportManagerCommand.FREERUNWAYS,
@@ -39,6 +41,8 @@ public enum AirportManagerCommand {
                 return "Exit";
             case GLOBAL_STATE:
                 return "Global-state";
+            case STATE:
+                return "State";
             case FREERUNWAYS:
                 return "Free-runways";
             case RUNWAYS:
@@ -61,6 +65,8 @@ public enum AirportManagerCommand {
                 return AirportManagerCommand.PARK;
             case "global-state":
                 return AirportManagerCommand.GLOBAL_STATE;
+            case "state":
+                return AirportManagerCommand.STATE;
             case "takeoff":
                 return AirportManagerCommand.TAKEOFF;
             case "free-runways":
