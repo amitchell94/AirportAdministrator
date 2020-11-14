@@ -30,6 +30,18 @@ public class Runway {
         }
     }
 
+    public void showRunways() {
+        for (int i = 0; i < runwayArray.length; i++) {
+            Plane plane = runwayArray[i];
+            System.out.print("Runway number " + (i + 1) + ": ");
+            if (plane == null) {
+                System.out.println("Free");
+            } else {
+                System.out.println("Occupied by plane " + plane.getId());
+            }
+        }
+    }
+
     public void landPlane(String argument) throws LandingPlaneException {
         if (argument == null) throw new LandingPlaneException("Unable to land plane, invalid input");
         String[] stringSplit = argument.split(",");
