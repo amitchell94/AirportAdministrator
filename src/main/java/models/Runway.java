@@ -31,7 +31,7 @@ public class Runway {
     }
 
     public void showRunways() {
-        for (int i = 0; i < runwayArray.length; i++) {
+        for (int i = 0; i < RUNWAY_SIZE; i++) {
             Plane plane = runwayArray[i];
             System.out.print("Runway number " + (i + 1) + ": ");
             if (plane == null) {
