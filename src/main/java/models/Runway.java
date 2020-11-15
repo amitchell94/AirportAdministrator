@@ -183,4 +183,96 @@ public class Runway {
             throw new CleanPlaneException("Unable to clean plane, invalid input");
         }
     }
+
+    public void refuelPlane(String argument) throws RefuelPlaneException {
+
+        if (argument == null) throw new RefuelPlaneException("Unable to refuel plane, invalid input");
+
+        try {
+            int planeId = Integer.parseInt(argument);
+
+            if (!availablePlanes.containsKey(planeId))
+                throw new RefuelPlaneException("Unable to refuel plane . No plane with that id found.");
+
+            Plane selectedPlane = availablePlanes.get(planeId);
+
+            if (selectedPlane.getState() != PlaneState.LANDED)
+                throw new RefuelPlaneException("Unable to refuel plane. Plane id: " + " is not landed.");
+
+
+        } catch (NumberFormatException | RefuelPlaneException e){
+            //TODO: Should add proper error handling here other than printStackTrace.
+            e.printStackTrace();
+            throw new RefuelPlaneException("Unable to refuel plane, invalid input");
+        }
+    }
+
+    public void unloadBaggagePlane(String argument) throws UnloadBaggagePlaneException {
+
+        if (argument == null) throw new UnloadBaggagePlaneException("Unable to unload the baggage, invalid input");
+
+        try {
+            int planeId = Integer.parseInt(argument);
+
+            if (!availablePlanes.containsKey(planeId))
+                throw new UnloadBaggagePlaneException("Unable to unload the baggage. No plane with that id found.");
+
+            Plane selectedPlane = availablePlanes.get(planeId);
+
+            if (selectedPlane.getState() != PlaneState.LANDED)
+                throw new UnloadBaggagePlaneException("Unable to unload the baggage. Plane id: " + " is not landed.");
+
+
+        } catch (NumberFormatException e){
+            //TODO: Should add proper error handling here other than printStackTrace.
+            e.printStackTrace();
+            throw new UnloadBaggagePlaneException("Unable to unload the baggage, invalid input");
+        }
+    }
+
+    public void unloadCargoPlane(String argument) throws UnloadCargoPlaneException {
+
+        if (argument == null) throw new UnloadCargoPlaneException("Unable to unload the cargo, invalid input");
+
+        try {
+            int planeId = Integer.parseInt(argument);
+
+            if (!availablePlanes.containsKey(planeId))
+                throw new UnloadCargoPlaneException("Unable to unload the cargo. No plane with that id found.");
+
+            Plane selectedPlane = availablePlanes.get(planeId);
+
+            if (selectedPlane.getState() != PlaneState.LANDED)
+                throw new UnloadCargoPlaneException("Unable to unload the cargo. Plane id: " + " is not landed.");
+
+
+        } catch (NumberFormatException e){
+            //TODO: Should add proper error handling here other than printStackTrace.
+            e.printStackTrace();
+            throw new UnloadCargoPlaneException("Unable to unload the cargo, invalid input");
+        }
+    }
+
+    public void maintainPlane(String argument) throws MaintenancePlaneException {
+
+        if (argument == null) throw new MaintenancePlaneException("Unable to maintain plane, invalid input");
+
+        try {
+            int planeId = Integer.parseInt(argument);
+
+            if (!availablePlanes.containsKey(planeId))
+                throw new MaintenancePlaneException("Unable to maintain plane . No plane with that id found.");
+
+            Plane selectedPlane = availablePlanes.get(planeId);
+
+            if (selectedPlane.getState() != PlaneState.LANDED)
+                throw new MaintenancePlaneException("Unable to maintain plane. Plane id: " + " is not landed.");
+
+
+        } catch (NumberFormatException e){
+            //TODO: Should add proper error handling here other than printStackTrace.
+            e.printStackTrace();
+            throw new MaintenancePlaneException("Unable to maintain plane, invalid input");
+        }
+    }
 }

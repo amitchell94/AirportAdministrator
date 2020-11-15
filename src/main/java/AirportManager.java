@@ -2,10 +2,7 @@ import helper.ScannerHelper;
 import helper.ParserHelper;
 import models.AirportManagerCommand;
 import models.Runway;
-import models.exception.LandingPlaneException;
-import models.exception.ParkPlaneException;
-import models.exception.PlaneStateException;
-import models.exception.TakeOffPlaneException;
+import models.exception.*;
 
 import java.io.IOException;
 
@@ -104,7 +101,51 @@ public class AirportManager {
                     }
                     try {
                         runway.cleanPlane(splittedString[1]);
-                    } catch (ParkPlaneException e) {
+                    } catch (CleanPlaneException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case REFUEL:
+                    if (splittedString.length < 1) {
+                        showWrongParametersNumberMessage();
+                        continue;
+                    }
+                    try {
+                        runway.refuelPlane(splittedString[1]);
+                    } catch (RefuelPlaneException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case UNLOAD_BAGGAGE:
+                    if (splittedString.length < 1) {
+                        showWrongParametersNumberMessage();
+                        continue;
+                    }
+                    try {
+                        runway.unloadBaggagePlane(splittedString[1]);
+                    } catch (UnloadBaggagePlaneException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case UNLOAD_CARGO:
+                    if (splittedString.length < 1) {
+                        showWrongParametersNumberMessage();
+                        continue;
+                    }
+                    try {
+                        runway.unloadCargoPlane(splittedString[1]);
+                    } catch (UnloadCargoPlaneException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case MAINTENANCE:
+                    if (splittedString.length < 1) {
+                        showWrongParametersNumberMessage();
+                        continue;
+                    }
+                    try {
+                        runway.maintainPlane(splittedString[1]);
+                    } catch (MaintenancePlaneException e) {
                         System.out.println(e.getMessage());
                     }
                     break;
