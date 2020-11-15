@@ -2,15 +2,17 @@ package models;
 
 import models.exception.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Runway {
     private static final int RUNWAY_SIZE = 10;
     Map<Integer,Plane> availablePlanes = new HashMap<>();
     Plane[] runwayArray = new Plane[RUNWAY_SIZE];
+    Timer timer  = new Timer();
+
 
     public static Runway createRunway(Map<Integer,Plane> availablePlanes) {
+
         if (availablePlanes == null ) return null;
         return new Runway(availablePlanes);
     }
@@ -176,11 +178,39 @@ public class Runway {
             if (selectedPlane.getState() != PlaneState.LANDED)
                 throw new CleanPlaneException("Unable to clean plane. Plane id: " + " is not landed.");
 
+            for (RequiredServiceState service: selectedPlane.getRequiredServices()) {
+                if (service.getService() == RequiredService.CLEANING) {
+                    timer.schedule(new SecondCounter(service,
+                            selectedPlane.getRequiredServices()),0,1000);
+                    return;
+                }
+            }
+            throw new CleanPlaneException("Unable to clean plane. The plane doesn't need cleaning");
 
         } catch (NumberFormatException e){
             //TODO: Should add proper error handling here other than printStackTrace.
             e.printStackTrace();
             throw new CleanPlaneException("Unable to clean plane, invalid input");
+        }
+    }
+
+    private static class SecondCounter extends TimerTask {
+        private RequiredServiceState requiredServiceState;
+        private Set<RequiredServiceState> requiredServiceStateSet;
+
+        public SecondCounter(RequiredServiceState requiredServiceState, Set<RequiredServiceState> requiredServiceStateSet) {
+            this.requiredServiceState = requiredServiceState;
+            this.requiredServiceStateSet = requiredServiceStateSet;
+        }
+
+        @Override
+        public void run() {
+            if (requiredServiceState.getRemainingSeconds() > 0) {
+                requiredServiceState.countdownRemainingSeconds();
+            } else {
+                requiredServiceStateSet.remove(requiredServiceState);
+                cancel();
+            }
         }
     }
 }

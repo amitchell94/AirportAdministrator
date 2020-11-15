@@ -17,6 +17,10 @@ public class RequiredServiceState {
         return remainingSeconds;
     }
 
+    public void countdownRemainingSeconds() {
+        remainingSeconds -= 1;
+    }
+
     @Override
     public String toString() {
         return service.toString() + ": " + remainingSeconds + " remaining seconds.";
