@@ -97,6 +97,17 @@ public class AirportManager {
                         System.out.println(e.getMessage());
                     }
                     break;
+                case CLEANING:
+                    if (splittedString.length < 1) {
+                        showWrongParametersNumberMessage();
+                        continue;
+                    }
+                    try {
+                        runway.cleanPlane(splittedString[1]);
+                    } catch (ParkPlaneException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
                 case EXIT:
                     return;
                 case UNKNOWN:

@@ -1,9 +1,6 @@
 package models;
 
-import models.exception.LandingPlaneException;
-import models.exception.ParkPlaneException;
-import models.exception.PlaneStateException;
-import models.exception.TakeOffPlaneException;
+import models.exception.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -162,5 +159,28 @@ public class Runway {
             throw new PlaneStateException("Unable to get plane state. Invalid input");
         }
 
+    }
+
+    public void cleanPlane(String argument) throws CleanPlaneException {
+
+        if (argument == null) throw new CleanPlaneException("Unable to clean plane, invalid input");
+
+        try {
+            int planeId = Integer.parseInt(argument);
+
+            if (!availablePlanes.containsKey(planeId))
+                throw new CleanPlaneException("Unable to clean plane . No plane with that id found.");
+
+            Plane selectedPlane = availablePlanes.get(planeId);
+
+            if (selectedPlane.getState() != PlaneState.LANDED)
+                throw new CleanPlaneException("Unable to clean plane. Plane id: " + " is not landed.");
+
+
+        } catch (NumberFormatException e){
+            //TODO: Should add proper error handling here other than printStackTrace.
+            e.printStackTrace();
+            throw new CleanPlaneException("Unable to clean plane, invalid input");
+        }
     }
 }
