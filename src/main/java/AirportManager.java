@@ -2,10 +2,7 @@ import helper.ScannerHelper;
 import helper.ParserHelper;
 import models.AirportManagerCommand;
 import models.Runway;
-import models.exception.LandingPlaneException;
-import models.exception.ParkPlaneException;
-import models.exception.PlaneStateException;
-import models.exception.TakeOffPlaneException;
+import models.exception.*;
 
 import java.io.IOException;
 
@@ -94,6 +91,17 @@ public class AirportManager {
                     try {
                         runway.parkPlane(splittedString[1]);
                     } catch (ParkPlaneException e) {
+                        System.out.println(e.getMessage());
+                    }
+                    break;
+                case CLEANING:
+                    if (splittedString.length < 1) {
+                        showWrongParametersNumberMessage();
+                        continue;
+                    }
+                    try {
+                        runway.cleanPlane(splittedString[1]);
+                    } catch (CleanPlaneException e) {
                         System.out.println(e.getMessage());
                     }
                     break;

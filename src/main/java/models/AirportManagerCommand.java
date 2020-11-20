@@ -12,6 +12,7 @@ public enum AirportManagerCommand {
     STATE,
     TAKEOFF,
     FREERUNWAYS,
+    CLEANING,
     PARK,
     UNKNOWN,
     EXIT;
@@ -23,6 +24,8 @@ public enum AirportManagerCommand {
                 AirportManagerCommand.STATE,
                 AirportManagerCommand.RUNWAYS,
                 AirportManagerCommand.TAKEOFF,
+                AirportManagerCommand.CLEANING,
+                AirportManagerCommand.PARK,
                 AirportManagerCommand.FREERUNWAYS,
                 AirportManagerCommand.EXIT
         ).collect(Collectors.toCollection(ArrayList::new));
@@ -37,6 +40,8 @@ public enum AirportManagerCommand {
                 return "Takeoff";
             case PARK:
                 return "Park";
+            case CLEANING:
+                return "Cleaning";
             case EXIT:
                 return "Exit";
             case GLOBAL_STATE:
@@ -65,6 +70,8 @@ public enum AirportManagerCommand {
                 return AirportManagerCommand.PARK;
             case "global-state":
                 return AirportManagerCommand.GLOBAL_STATE;
+            case "cleaning":
+                return AirportManagerCommand.CLEANING;
             case "state":
                 return AirportManagerCommand.STATE;
             case "takeoff":
