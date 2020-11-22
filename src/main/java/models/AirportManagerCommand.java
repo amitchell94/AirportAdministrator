@@ -12,6 +12,11 @@ public enum AirportManagerCommand {
     STATE,
     TAKEOFF,
     FREERUNWAYS,
+    CLEANING,
+    REFUEL,
+    UNLOAD_BAGGAGE,
+    UNLOAD_CARGO,
+    MAINTENANCE,
     PARK,
     UNKNOWN,
     EXIT;
@@ -23,6 +28,12 @@ public enum AirportManagerCommand {
                 AirportManagerCommand.STATE,
                 AirportManagerCommand.RUNWAYS,
                 AirportManagerCommand.TAKEOFF,
+                AirportManagerCommand.CLEANING,
+                AirportManagerCommand.REFUEL,
+                AirportManagerCommand.UNLOAD_BAGGAGE,
+                AirportManagerCommand.UNLOAD_CARGO,
+                AirportManagerCommand.MAINTENANCE,
+                AirportManagerCommand.PARK,
                 AirportManagerCommand.FREERUNWAYS,
                 AirportManagerCommand.EXIT
         ).collect(Collectors.toCollection(ArrayList::new));
@@ -37,6 +48,16 @@ public enum AirportManagerCommand {
                 return "Takeoff";
             case PARK:
                 return "Park";
+            case CLEANING:
+                return "Cleaning";
+            case REFUEL:
+                return "Refuel";
+            case UNLOAD_BAGGAGE:
+                return "Unload-baggage";
+            case UNLOAD_CARGO:
+                return "Unload-cargo";
+            case MAINTENANCE:
+                return "Maintenance";
             case EXIT:
                 return "Exit";
             case GLOBAL_STATE:
@@ -65,6 +86,16 @@ public enum AirportManagerCommand {
                 return AirportManagerCommand.PARK;
             case "global-state":
                 return AirportManagerCommand.GLOBAL_STATE;
+            case "cleaning":
+                return AirportManagerCommand.CLEANING;
+            case "refuel":
+                return AirportManagerCommand.REFUEL;
+            case "unload-baggage":
+                return AirportManagerCommand.UNLOAD_BAGGAGE;
+            case "unload-cargo":
+                return AirportManagerCommand.UNLOAD_CARGO;
+            case "maintenance":
+                return AirportManagerCommand.MAINTENANCE;
             case "state":
                 return AirportManagerCommand.STATE;
             case "takeoff":
