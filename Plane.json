@@ -5,43 +5,36 @@
          "Cleaning",
          "Refuel"
       ],
-      "Origin":"MADa",
+      "Origin":"MAD",
       "Destination":"NYC"
 	},
 	{
       "Id":"2",
       "RequiredServices":[
-         "Cleaning",
-         "Refuel"
+         "Baggage Unload",
+         "Cargo Unload",
+         "Maintenance"
       ],
-      "Origin":"MADb",
-      "Destination":"NYC"
+      "Origin":"LHR",
+      "Destination":"CDG"
 	},
 	{
       "Id":"3",
       "RequiredServices":[
-         "Cleaning",
-         "Refuel"
       ],
-      "Origin":"MADc",
-      "Destination":"NYC"
+      "Origin":"ATL",
+      "Destination":"LAX"
 	},
 	{
       "Id":"4",
       "RequiredServices":[
          "Cleaning",
-         "Refuel"
+         "Refuel",
+         "Baggage Unload",
+         "Cargo Unload",
+         "Maintenance"
       ],
-      "Origin":"MADd",
-      "Destination":"NYC"
-	},
-	{
-      "Id":"5",
-      "RequiredServices":[
-         "Cleaning",
-         "Refuel"
-      ],
-      "Origin":"MADe",
-      "Destination":"NYC"
+      "Origin":"ORD",
+      "Destination":""
 	}
 ]
