@@ -249,7 +249,7 @@ public class Runway {
                     return;
                 }
             }
-            throw new UnloadBaggagePlaneException("Unable to unload the baggage. The plane doesn't need cleaning");
+            throw new UnloadBaggagePlaneException("Unable to unload the baggage. The plane doesn't need to be unloaded (Baggage)");
 
 
         } catch (NumberFormatException e){
@@ -281,7 +281,7 @@ public class Runway {
                     return;
                 }
             }
-            throw new UnloadCargoPlaneException("Unable to unload the cargo. The plane doesn't need cleaning");
+            throw new UnloadCargoPlaneException("Unable to unload the cargo. The plane doesn't need to be unloaded (Cargo)");
 
 
         } catch (NumberFormatException e){
@@ -313,7 +313,7 @@ public class Runway {
                     return;
                 }
             }
-            throw new MaintenancePlaneException("Unable to maintain plane. The plane doesn't need cleaning");
+            throw new MaintenancePlaneException("Unable to maintain plane. The plane doesn't need Maintenance");
 
 
         } catch (NumberFormatException e){
