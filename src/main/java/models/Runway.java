@@ -165,7 +165,6 @@ public class Runway {
     }
 
     public void cleanPlane(String argument) throws CleanPlaneException {
-
         if (argument == null) throw new CleanPlaneException("Unable to clean plane, invalid input");
 
         try {
@@ -177,7 +176,7 @@ public class Runway {
             Plane selectedPlane = availablePlanes.get(planeId);
 
             if (selectedPlane.getState() != PlaneState.LANDED)
-                throw new CleanPlaneException("Unable to clean plane. Plane id: " + " is not landed.");
+                throw new CleanPlaneException("Unable to clean plane. Plane id: " + planeId + " is not landed.");
 
             for (RequiredServiceState service: selectedPlane.getRequiredServices()) {
                 if (service.getService() == RequiredService.CLEANING) {
@@ -209,16 +208,16 @@ public class Runway {
             Plane selectedPlane = availablePlanes.get(planeId);
 
             if (selectedPlane.getState() != PlaneState.LANDED)
-                throw new RefuelPlaneException("Unable to refuel plane. Plane id: " + " is not landed.");
+                throw new RefuelPlaneException("Unable to refuel plane. Plane id: " + planeId + " is not landed.");
 
             for (RequiredServiceState service: selectedPlane.getRequiredServices()) {
-                if (service.getService() == RequiredService.CLEANING) {
+                if (service.getService() == RequiredService.REFUEL) {
                     timer.schedule(new SecondCounter(service,
                             selectedPlane.getRequiredServices()),0,1000);
                     return;
                 }
             }
-            throw new RefuelPlaneException("Unable to refuel plane. The plane doesn't need cleaning");
+            throw new RefuelPlaneException("Unable to refuel plane. The plane doesn't need refueling");
 
 
         } catch (NumberFormatException | RefuelPlaneException e){
@@ -241,16 +240,16 @@ public class Runway {
             Plane selectedPlane = availablePlanes.get(planeId);
 
             if (selectedPlane.getState() != PlaneState.LANDED)
-                throw new UnloadBaggagePlaneException("Unable to unload the baggage. Plane id: " + " is not landed.");
+                throw new UnloadBaggagePlaneException("Unable to unload the baggage. Plane id: " + planeId + " is not landed.");
 
             for (RequiredServiceState service: selectedPlane.getRequiredServices()) {
-                if (service.getService() == RequiredService.CLEANING) {
+                if (service.getService() == RequiredService.BAGGAGE_UNLOAD) {
                     timer.schedule(new SecondCounter(service,
                             selectedPlane.getRequiredServices()),0,1000);
                     return;
                 }
             }
-            throw new UnloadBaggagePlaneException("Unable to unload the baggage. The plane doesn't need cleaning");
+            throw new UnloadBaggagePlaneException("Unable to unload the baggage. The plane doesn't need to be unloaded (Baggage)");
 
 
         } catch (NumberFormatException e){
@@ -273,16 +272,16 @@ public class Runway {
             Plane selectedPlane = availablePlanes.get(planeId);
 
             if (selectedPlane.getState() != PlaneState.LANDED)
-                throw new UnloadCargoPlaneException("Unable to unload the cargo. Plane id: " + " is not landed.");
+                throw new UnloadCargoPlaneException("Unable to unload the cargo. Plane id: " + planeId + " is not landed.");
 
             for (RequiredServiceState service: selectedPlane.getRequiredServices()) {
-                if (service.getService() == RequiredService.CLEANING) {
+                if (service.getService() == RequiredService.BAGGAGE_UNLOAD) {
                     timer.schedule(new SecondCounter(service,
                             selectedPlane.getRequiredServices()),0,1000);
                     return;
                 }
             }
-            throw new UnloadCargoPlaneException("Unable to unload the cargo. The plane doesn't need cleaning");
+            throw new UnloadCargoPlaneException("Unable to unload the cargo. The plane doesn't need to be unloaded (Cargo)");
 
 
         } catch (NumberFormatException e){
@@ -308,13 +307,13 @@ public class Runway {
                 throw new MaintenancePlaneException("Unable to maintain plane. Plane id: " + " is not landed.");
 
             for (RequiredServiceState service: selectedPlane.getRequiredServices()) {
-                if (service.getService() == RequiredService.CLEANING) {
+                if (service.getService() == RequiredService.MAINTENANCE) {
                     timer.schedule(new SecondCounter(service,
                             selectedPlane.getRequiredServices()),0,1000);
                     return;
                 }
             }
-            throw new MaintenancePlaneException("Unable to maintain plane. The plane doesn't need cleaning");
+            throw new MaintenancePlaneException("Unable to maintain plane. The plane doesn't need Maintenance");
 
 
         } catch (NumberFormatException e){
