@@ -8,13 +8,12 @@ import java.util.*;
 
 public class Runway {
     private static final int RUNWAY_SIZE = 10;
-    Map<Integer,Plane> availablePlanes = new HashMap<>();
+    Map<Integer,Plane> availablePlanes;
     Plane[] runwayArray = new Plane[RUNWAY_SIZE];
     Timer timer  = new Timer();
 
     public static Runway createRunway(Map<Integer,Plane> availablePlanes) {
-
-        if (availablePlanes == null ) return null;
+        if (availablePlanes == null) return null;
         return new Runway(availablePlanes);
     }
 
@@ -220,7 +219,7 @@ public class Runway {
             throw new RefuelPlaneException("Unable to refuel plane. The plane doesn't need refueling");
 
 
-        } catch (NumberFormatException | RefuelPlaneException e){
+        } catch (NumberFormatException e){
             //TODO: Should add proper error handling here other than printStackTrace.
             e.printStackTrace();
             throw new RefuelPlaneException("Unable to refuel plane, invalid input");

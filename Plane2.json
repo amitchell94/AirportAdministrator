@@ -1,0 +1,29 @@
+[
+	{
+      "Id":"1",
+      "RequiredServices":[
+         "Cleaning",
+         "Refuel"
+      ],
+      "Origin":"MAD",
+      "Destination":"NYC"
+	},
+	{
+      "Id":"2",
+      "RequiredServices":[
+         "Baggage Unload",
+         "Cargo Unload",
+         "Maintenance"
+      ],
+      "Origin":"LHR",
+      "Destination":"CDG"
+	},
+    {
+	{
+      "Id":"3",
+      "RequiredServices":[
+      ],
+      "Origin":"ATL",
+      "Destination":"LAX"
+	}
+]
