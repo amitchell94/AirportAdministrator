@@ -274,7 +274,7 @@ public class Runway {
                 throw new UnloadCargoPlaneException("Unable to unload the cargo. Plane id: " + planeId + " is not landed.");
 
             for (RequiredServiceState service: selectedPlane.getRequiredServices()) {
-                if (service.getService() == RequiredService.BAGGAGE_UNLOAD) {
+                if (service.getService() == RequiredService.CARGO_UNLOAD) {
                     timer.schedule(new SecondCounter(service,
                             selectedPlane.getRequiredServices()),0,1000);
                     return;
