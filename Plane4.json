@@ -1,0 +1,11 @@
+[
+    {
+      "Id":"helloThere",
+      "RequiredServices":[
+         "Cleaning",
+         "Refuel"
+      ],
+      "Origin":"MAD",
+      "Destination":"NYC"
+    }
+]

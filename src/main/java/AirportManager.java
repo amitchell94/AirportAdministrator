@@ -48,7 +48,7 @@ public class AirportManager {
                     runway.showGlobalState();
                     break;
                 case STATE:
-                    if (splittedString.length < 1) {
+                    if (splittedString.length < 2) {
                         showWrongParametersNumberMessage();
                         continue;
                     }
@@ -73,7 +73,7 @@ public class AirportManager {
                     }
                     break;
                 case TAKEOFF:
-                    if (splittedString.length < 1) {
+                    if (splittedString.length < 2) {
                         showWrongParametersNumberMessage();
                         continue;
                     }
@@ -84,7 +84,7 @@ public class AirportManager {
                     }
                     break;
                 case PARK:
-                    if (splittedString.length < 1) {
+                    if (splittedString.length < 2) {
                         showWrongParametersNumberMessage();
                         continue;
                     }
@@ -95,7 +95,7 @@ public class AirportManager {
                     }
                     break;
                 case CLEANING:
-                    if (splittedString.length < 1) {
+                    if (splittedString.length < 2) {
                         showWrongParametersNumberMessage();
                         continue;
                     }
@@ -106,7 +106,7 @@ public class AirportManager {
                     }
                     break;
                 case REFUEL:
-                    if (splittedString.length < 1) {
+                    if (splittedString.length < 2) {
                         showWrongParametersNumberMessage();
                         continue;
                     }
@@ -117,7 +117,7 @@ public class AirportManager {
                     }
                     break;
                 case UNLOAD_BAGGAGE:
-                    if (splittedString.length < 1) {
+                    if (splittedString.length < 2) {
                         showWrongParametersNumberMessage();
                         continue;
                     }
@@ -128,7 +128,7 @@ public class AirportManager {
                     }
                     break;
                 case UNLOAD_CARGO:
-                    if (splittedString.length < 1) {
+                    if (splittedString.length < 2) {
                         showWrongParametersNumberMessage();
                         continue;
                     }
@@ -139,7 +139,7 @@ public class AirportManager {
                     }
                     break;
                 case MAINTENANCE:
-                    if (splittedString.length < 1) {
+                    if (splittedString.length < 2) {
                         showWrongParametersNumberMessage();
                         continue;
                     }

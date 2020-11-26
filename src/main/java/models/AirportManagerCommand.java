@@ -53,9 +53,9 @@ public enum AirportManagerCommand {
             case REFUEL:
                 return "Refuel";
             case UNLOAD_BAGGAGE:
-                return "Unload-baggage";
+                return "Baggage-unload";
             case UNLOAD_CARGO:
-                return "Unload-cargo";
+                return "Cargo-unload";
             case MAINTENANCE:
                 return "Maintenance";
             case EXIT:
@@ -90,9 +90,9 @@ public enum AirportManagerCommand {
                 return AirportManagerCommand.CLEANING;
             case "refuel":
                 return AirportManagerCommand.REFUEL;
-            case "unload-baggage":
+            case "baggage-unload":
                 return AirportManagerCommand.UNLOAD_BAGGAGE;
-            case "unload-cargo":
+            case "cargo-unload":
                 return AirportManagerCommand.UNLOAD_CARGO;
             case "maintenance":
                 return AirportManagerCommand.MAINTENANCE;
