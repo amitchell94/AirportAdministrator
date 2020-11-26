@@ -93,7 +93,7 @@ public class Runway {
                 throw new TakeOffPlaneException("Plane unable to take off. Plane id: " + " is not landed.");
 
             for (int i = 0; i < RUNWAY_SIZE; i++) {
-                if (runwayArray[i].getId() == planeId) {
+                if (runwayArray[i] != null && runwayArray[i].getId() == planeId) {
                     // Once a plane takes off, we delete it
                     availablePlanes.remove(planeId);
                     runwayArray[i] = null;
