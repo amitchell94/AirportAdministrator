@@ -217,7 +217,7 @@ public class Runway {
                     return;
                 }
             }
-            throw new RefuelPlaneException("Unable to refuel plane. The plane doesn't need cleaning");
+            throw new RefuelPlaneException("Unable to refuel plane. The plane doesn't need refueling");
 
 
         } catch (NumberFormatException | RefuelPlaneException e){
