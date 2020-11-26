@@ -122,7 +122,7 @@ public class Runway {
                 throw new ParkPlaneException("Unable to park plane. Plane id: " + " is not landed.");
 
             for (int i = 0; i < RUNWAY_SIZE; i++) {
-                if (runwayArray[i].getId() == planeId) {
+                if (runwayArray[i] != null && runwayArray[i].getId() == planeId) {
                     // Once a plane parks, we remove it from the runway
                     selectedPlane.setState(PlaneState.PARKED);
                     runwayArray[i] = null;
