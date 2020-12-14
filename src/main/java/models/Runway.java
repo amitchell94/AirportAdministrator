@@ -122,7 +122,7 @@ public class Runway {
                 throw new ParkPlaneException("Unable to park plane. Plane id: " + " is not landed.");
 
             for (int i = 0; i < RUNWAY_SIZE; i++) {
-                if (runwayArray[i].getId() == planeId) {
+                if (runwayArray[i] != null && runwayArray[i].getId() == planeId) {
                     // Once a plane parks, we remove it from the runway
                     selectedPlane.setState(PlaneState.PARKED);
                     runwayArray[i] = null;
@@ -274,7 +274,7 @@ public class Runway {
                 throw new UnloadCargoPlaneException("Unable to unload the cargo. Plane id: " + planeId + " is not landed.");
 
             for (RequiredServiceState service: selectedPlane.getRequiredServices()) {
-                if (service.getService() == RequiredService.BAGGAGE_UNLOAD) {
+                if (service.getService() == RequiredService.CARGO_UNLOAD) {
                     timer.schedule(new SecondCounter(service,
                             selectedPlane.getRequiredServices()),0,1000);
                     return;
