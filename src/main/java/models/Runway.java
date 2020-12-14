@@ -85,8 +85,8 @@ public class Runway {
 
             Plane selectedPlane = availablePlanes.get(planeId);
 
-            if (selectedPlane.getDestination().isEmpty() || selectedPlane.getDestination() == null)
-                throw new TakeOffPlaneException("Plane unable to take off, plane does not have a destination");
+           // if (selectedPlane.getDestination().isEmpty() || selectedPlane.getDestination() == null)
+            //    throw new TakeOffPlaneException("Plane unable to take off, plane does not have a destination");
 
             if (selectedPlane.getState() != PlaneState.LANDED)
                 throw new TakeOffPlaneException("Plane unable to take off. Plane id: " + " is not landed.");
